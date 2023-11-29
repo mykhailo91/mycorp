@@ -1,83 +1,680 @@
-<h1 class="visibility-hidden">{{ help_center.name }}</h1>
+<script>
+    $('.wrapper-main').css({"margin-top": "0"});
+    $('#site-header').removeClass('header-has-background')
+    $('.head').append('<style>.search:before { background : url("{{asset 'Search.svg'}}"); } </style>');
+    $(document).ready(function () {
+        $('#site-header').show(0);
+        $('#header-homepage').show(0);
+        $('.hero-title').addClass('animate-animated animate-fadeInUp animate-delay-1.5s');
+    });
+    $('.header-panel > a, .hc-name a').css({"color": "{{settings.hero_title_color}}"})
+    $('.searchbar-top').css({'display': 'none'})
+</script>
 
-<section id="main-content" class="section hero">
-  <div class="hero-inner">
-    <h2 class="visibility-hidden">{{ t 'search' }}</h2>
-    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" focusable="false" viewBox="0 0 12 12" class="search-icon" aria-hidden="true">
-      <circle cx="4.5" cy="4.5" r="4" fill="none" stroke="currentColor"/>
-      <path stroke="currentColor" stroke-linecap="round" d="M11 11L7.5 7.5"/>
-    </svg>
-    {{search submit=false instant=settings.instant_search class='search search-full'}}
-  </div>
-</section>
+{{#if settings.hero_carousel}}
+    <div id="hero-carousel" class="owl-carousel owl-theme" style="overflow: hidden;">
+        {{#isnt settings.hero_carousel_text_1 ''}}
+            <div class="hero-item">
+                <div class="hero-background hero-background-carousel-1 {{#if
+                        settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
+                <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
+                    <div class="text-center">
+                        <div class="hero-title">
+                            {{settings.hero_carousel_text_1}}
+                        </div>
+                        <p class="hero-desc">
+                            {{settings.hero_carousel_desc_1}}
+                        </p>
+                        <a href="{{settings.hero_carousel_btn_link_1}}" class="hero-button btn btn-primary">
+                            {{settings.hero_carousel_btn_1}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/isnt}}
 
-<div class="container">
-  <section class="section knowledge-base">
-    <h2 class="visibility-hidden">{{ t 'categories' }}</h2>
-    <section class="categories blocks">
-      <ul class="blocks-list">
-        {{#each categories}}
-          {{#if ../has_multiple_categories}}
-            <li class="blocks-item">
-              <a href='{{url}}' class="blocks-item-link">
-                <span class="blocks-item-title">{{name}}</span>
-                <span class="blocks-item-description">{{excerpt description}}</span>
-              </a>
-            </li>
-          {{else}}
-            {{#each sections}}
-              <li class="blocks-item">
-                <a href='{{url}}' class="blocks-item-link">
-                  <span class="blocks-item-title">
-                    {{name}}
-                  </span>
-                  <span class="blocks-item-description">{{excerpt description}}</span>
-                </a>
-              </li>
-            {{/each}}
-          {{/if}}
-        {{/each}}
-      </ul>
-      {{pagination}}
-    </section>
+        {{#isnt settings.hero_carousel_text_2 ''}}
+            <div class="hero-item">
+                <div class="hero-background hero-background-carousel-2 {{#if
+                        settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
+                <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
+                    <div class="text-center">
+                        <div class="hero-title">
+                            {{settings.hero_carousel_text_2}}
+                        </div>
+                        <p class="hero-desc">
+                            {{settings.hero_carousel_desc_2}}
+                        </p>
+                        <a href="{{settings.hero_carousel_btn_link_2}}" class="hero-button btn btn-primary">
+                            {{settings.hero_carousel_btn_2}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/isnt}}
 
-    {{#if promoted_articles}}
-      <section class="articles">
-        <h2>{{t 'promoted_articles'}}</h2>
-        <ul class="article-list promoted-articles">
-          {{#each promoted_articles}}
-            <li class="promoted-articles-item">
-                <a href="{{url}}">
-                  {{title}}
+        {{#isnt settings.hero_carousel_text_3 ''}}
+            <div class="hero-item">
+                <div class="hero-background hero-background-carousel-3 {{#if
+                        settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
+                <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
+                    <div class="text-center">
+                        <div class="hero-title">
+                            {{settings.hero_carousel_text_3}}
+                        </div>
+                        <p class="hero-desc">
+                            {{settings.hero_carousel_desc_3}}
+                        </p>
+                        <a href="{{settings.hero_carousel_btn_link_3}}" class="hero-button btn btn-primary">
+                            {{settings.hero_carousel_btn_3}}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/isnt}}
+    </div>
+{{else}}
+    <div class="hero-item">
+        <div class="hero-background {{#if settings.hero_banner_gradient_toggle}} hero-background-gradient {{/if}}{{#if
+                settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
+        <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
+            <div class="hero-title">
+                {{#if settings.dc_toggle}}
+                    {{dc 'intro_title_text'}}
+                {{else}}
+                    {{settings.hero_title_text}}
+                {{/if}}
+            </div>
+            <div class="relative">
+                {{search instant=true placeholder=settings.search_placeholder_text}}
+                <div class="searchbar-info" data-fancybox data-src="#findModel">
+                    <i class="fa fa-info-circle"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+{{/if}}
 
-                  {{#if internal}}
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" focusable="false" viewBox="0 0 16 16" class="icon-lock" title="{{t 'internal'}}">
-                      <rect width="12" height="9" x="2" y="7" fill="currentColor" rx="1" ry="1"/>
-                      <path fill="none" stroke="currentColor" d="M4.5 7.5V4a3.5 3.5 0 017 0v3.5"/>
-                    </svg>
-                  {{/if}}
-                </a>
-            </li>
-          {{/each}}
-        </ul>
-      </section>
-    {{/if}}
-  </section>
+<div class="homepage-container light-bg">
+    <div class="container-wrapper homepage-base">
+        {{#if settings.show_information_box}}
+            <section class="section knowledge-base">
+                <div id="homepage-carousel" class="owl-carousel owl-theme" style="overflow:hidden;">
+                    {{#isnt settings.homepage_info_title_1 ''}}
+                        <a href="{{settings.homepage_info_link_1}}">
+                            <div>
+                                <div class="text-center">
+                                    <h4>{{#if settings.dc_toggle}}{{dc
+                                            'homepage_info_title_1'}}{{else}}{{settings.homepage_info_title_1}}{{/if}}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    {{/isnt}}
+                    {{#isnt settings.homepage_info_title_2 ''}}
+                        <a href="{{settings.homepage_info_link_2}}">
+                            <div>
+                                <div class="text-center">
+                                    <h4>{{#if settings.dc_toggle}}{{dc
+                                            'homepage_info_title_2'}}{{else}}{{settings.homepage_info_title_2}}{{/if}}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    {{/isnt}}
+                    {{#isnt settings.homepage_info_title_3 ''}}
+                        <a href="{{settings.homepage_info_link_3}}">
+                            <div>
+                                <div class="text-center">
+                                    <h4>{{#if settings.dc_toggle}}{{dc
+                                            'homepage_info_title_3'}}{{else}}{{settings.homepage_info_title_3}}{{/if}}</h4>
+                                </div>
+                            </div>
+                        </a>
+                    {{/isnt}}
+                </div>
+            </section>
+        {{/if}}
+        <!--<div class="site-wrapper">
+      {{#if settings.custom_block_1_toggle}}
+      <div class="site-block" style="background-color: #60d8c5!important;">
+        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                'custom_block_1_url'}}{{else}}{{settings.custom_block_1_url}}{{/if}}">
+          <div class="site-icon site-icon-1"><img class="custom-block-image"src="{{settings.custom_block_1_icon}}" alt=""></div>
+          <h4>{{#if settings.dc_toggle}}
+            {{dc'custom_block_1_title'}}
+        {{else}}
+            {{settings.custom_block_1_title}}
+        {{/if}}
+          </h4>
+        </a>
+      </div>
+      {{/if}}
 
-  {{#if help_center.community_enabled}}
-    <section class="section home-section community">
-      <h2>{{t 'community'}}</h2>
-      {{#link 'community' class='community-link'}}
-        {{t 'join_conversation'}}
-      {{/link}}
+            {{#if settings.custom_block_2_toggle}}
+      <div class="site-block">
+        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                    'custom_block_2_url'}}{{else}}{{settings.custom_block_2_url}}{{/if}}">
+          <div class="site-icon site-icon-2"><img class="custom-block-image"src="{{settings.custom_block_2_icon}}" alt=""></div>
+          <h4>{{#if settings.dc_toggle}}
+                {{dc'custom_block_2_title'}}
+            {{else}}
+                {{settings.custom_block_2_title}}
+            {{/if}}
+          </h4>
+        </a>
+      </div>
+      {{/if}}
 
-      <div class="community-image"></div>
-    </section>
-  {{/if}}
+            {{#if settings.custom_block_3_toggle}}
+      <div class="site-block">
+        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                    'custom_block_3_url'}}{{else}}{{settings.custom_block_3_url}}{{/if}}">
+          <div class="site-icon site-icon-3"><img class="custom-block-image"src="{{settings.custom_block_3_icon}}" alt=""></div>
+          <h4>{{#if settings.dc_toggle}}
+                {{dc'custom_block_3_title'}}
+            {{else}}
+                {{settings.custom_block_3_title}}
+            {{/if}}
+          </h4>
+        </a>
+      </div>
+      {{/if}}
 
-  <section class="section home-section activity">
-    {{#if settings.show_recent_activity}}
-      {{recent_activity}}
-    {{/if}}
-  </section>
+            {{#if settings.custom_block_4_toggle}}
+      <div class="site-block">
+        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                    'custom_block_4_url'}}{{else}}{{settings.custom_block_4_url}}{{/if}}">
+          <div class="site-icon site-icon-4"><img class="custom-block-image"src="{{settings.custom_block_4_icon}}" alt=""></div>
+          <h4>{{#if settings.dc_toggle}}
+                {{dc'custom_block_4_title'}}
+            {{else}}
+                {{settings.custom_block_4_title}}
+            {{/if}}
+          </h4>
+        </a>
+      </div>
+      {{/if}}
+
+            {{#if settings.custom_block_5_toggle}}
+      <div class="site-block">
+        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                    'custom_block_5_url'}}{{else}}{{settings.custom_block_5_url}}{{/if}}">
+          <div class="site-icon site-icon-5"><img class="custom-block-image"src="{{settings.custom_block_5_icon}}" alt=""></div>
+          <h4>{{#if settings.dc_toggle}}
+                {{dc'custom_block_5_title'}}
+            {{else}}
+                {{settings.custom_block_5_title}}
+            {{/if}}
+          </h4>
+        </a>
+      </div>
+      {{/if}}
+
+            {{#if settings.custom_block_6_toggle}}
+      <div class="site-block">
+        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                    'custom_block_6_url'}}{{else}}{{settings.custom_block_6_url}}{{/if}}">
+          <div class="site-icon site-icon-6"><img class="custom-block-image"src="{{settings.custom_block_6_icon}}" alt=""></div>
+          <h4>{{#if settings.dc_toggle}}
+                {{dc'custom_block_6_title'}}
+            {{else}}
+                {{settings.custom_block_6_title}}
+            {{/if}}
+          </h4>
+        </a>
+      </div>
+      {{/if}}
+
+    </div>  -->
+        <div class="site-wrapper">
+            {{#if settings.custom_block_5_toggle}}
+                <div class="site-block">
+                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                            'custom_block_5_url'}}{{else}}{{settings.custom_block_5_url}}{{/if}}">
+                        <span class="site-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
+                               fill="none">
+  <path d="M30.9275 14.625L29.1775 10.25C29.029 9.87984 28.7728 9.56279 28.4421 9.33992C28.1114 9.11705 27.7213 8.99863 27.3225 9H23V8C23 7.73478 22.8946 7.48043 22.7071 7.29289C22.5196 7.10536 22.2652 7 22 7H3C2.46957 7 1.96086 7.21071 1.58579 7.58579C1.21071 7.96086 1 8.46957 1 9V23C1 23.5304 1.21071 24.0391 1.58579 24.4142C1.96086 24.7893 2.46957 25 3 25H5.125C5.3453 25.8604 5.8457 26.623 6.54731 27.1676C7.24892 27.7122 8.11183 28.0078 9 28.0078C9.88817 28.0078 10.7511 27.7122 11.4527 27.1676C12.1543 26.623 12.6547 25.8604 12.875 25H19.125C19.3453 25.8604 19.8457 26.623 20.5473 27.1676C21.2489 27.7122 22.1118 28.0078 23 28.0078C23.8882 28.0078 24.7511 27.7122 25.4527 27.1676C26.1543 26.623 26.6547 25.8604 26.875 25H29C29.5304 25 30.0391 24.7893 30.4142 24.4142C30.7893 24.0391 31 23.5304 31 23V15C31.0003 14.8715 30.9757 14.7441 30.9275 14.625ZM23 11H27.3225L28.5225 14H23V11ZM3 9H21V17H3V9ZM9 26C8.60444 26 8.21776 25.8827 7.88886 25.6629C7.55996 25.4432 7.30362 25.1308 7.15224 24.7654C7.00087 24.3999 6.96126 23.9978 7.03843 23.6098C7.1156 23.2219 7.30608 22.8655 7.58579 22.5858C7.86549 22.3061 8.22186 22.1156 8.60982 22.0384C8.99778 21.9613 9.39991 22.0009 9.76537 22.1522C10.1308 22.3036 10.4432 22.56 10.6629 22.8889C10.8827 23.2178 11 23.6044 11 24C11 24.5304 10.7893 25.0391 10.4142 25.4142C10.0391 25.7893 9.53043 26 9 26ZM19.125 23H12.875C12.6547 22.1396 12.1543 21.377 11.4527 20.8324C10.7511 20.2878 9.88817 19.9922 9 19.9922C8.11183 19.9922 7.24892 20.2878 6.54731 20.8324C5.8457 21.377 5.3453 22.1396 5.125 23H3V19H21V20.5387C20.5402 20.8045 20.1377 21.159 19.8158 21.5814C19.4939 22.0039 19.2591 22.4861 19.125 23ZM23 26C22.6044 26 22.2178 25.8827 21.8889 25.6629C21.56 25.4432 21.3036 25.1308 21.1522 24.7654C21.0009 24.3999 20.9613 23.9978 21.0384 23.6098C21.1156 23.2219 21.3061 22.8655 21.5858 22.5858C21.8655 22.3061 22.2219 22.1156 22.6098 22.0384C22.9978 21.9613 23.3999 22.0009 23.7654 22.1522C24.1308 22.3036 24.4432 22.56 24.6629 22.8889C24.8827 23.2178 25 23.6044 25 24C25 24.5304 24.7893 25.0391 24.4142 25.4142C24.0391 25.7893 23.5304 26 23 26ZM29 23H26.875C26.6521 22.1417 26.1507 21.3815 25.4495 20.8387C24.7483 20.2958 23.8868 20.0008 23 20V16H29V23Z"
+        fill="black"/>
+</svg>
+                      </span>
+                        <span class="site-controls">
+                            <h4>{{#if settings.dc_toggle}}
+                                {{dc'custom_block_5_title'}}
+                            {{else}}
+                                {{settings.custom_block_5_title}}
+                            {{/if}}
+                            </h4>
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M16.2673 19.7924C15.9674 20.0781 15.4926 20.0666 15.2069 19.7666C14.9213 19.4667 14.9328 18.992 15.2327 18.7063L21.4841 12.7517L0.75 12.7517C0.335787 12.7517 0 12.4159 0 12.0017C0 11.5875 0.335787 11.2517 0.75 11.2517L21.4842 11.2517L15.2327 5.29697C14.9328 5.01129 14.9213 4.53655 15.2069 4.23663C15.4926 3.9367 15.9674 3.92516 16.2673 4.21084L23.6862 11.2775C23.8551 11.4385 23.9551 11.6437 23.9861 11.8571C23.9952 11.9039 24 11.9522 24 12.0017C24 12.0512 23.9952 12.0997 23.986 12.1466C23.955 12.3598 23.855 12.5649 23.6862 12.7257L16.2673 19.7924Z" fill="#6610F2"/>
+</svg>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            {{/if}}
+
+            {{#if settings.custom_block_6_toggle}}
+                <div class="site-block">
+                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                            'custom_block_6_url'}}{{else}}{{settings.custom_block_6_url}}{{/if}}">
+                        <!--<div class="site-icon site-icon-6"><img class="custom-block-image"src="{{settings.custom_block_6_icon}}" alt=""></div>-->
+                        <span class="site-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="33" viewBox="0 0 32 33" fill="none">
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M6 5C6 3.34315 7.34315 2 9 2H19.1716C19.9672 2 20.7303 2.31607 21.2929 2.87868L27.1213 8.70711C27.6839 9.26972 28 10.0328 28 10.8284V27C28 28.6569 26.6569 30 25 30H15.1153C15.5319 29.3887 15.866 28.7167 16.1016 28H25C25.5523 28 26 27.5523 26 27V12H21C19.3431 12 18 10.6569 18 9V4H9C8.44772 4 8 4.44772 8 5V17.5154C7.30565 17.5582 6.63526 17.6896 6 17.8984V5ZM21 10H25.5858L20 4.41421V9C20 9.55228 20.4477 10 21 10Z" fill="black"/>
+  <path d="M19 24H16.3596C16.2261 23.2964 16.0005 22.6254 15.6958 22H19C19.5523 22 20 22.4477 20 23C20 23.5523 19.5523 24 19 24Z" fill="black"/>
+  <path d="M23 20H14.3095C13.4768 19.1208 12.4467 18.4304 11.2901 18H23C23.5523 18 24 18.4477 24 19C24 19.5523 23.5523 20 23 20Z" fill="black"/>
+  <path d="M24 15C24 15.5523 23.5523 16 23 16H11C10.4477 16 10 15.5523 10 15C10 14.4477 10.4477 14 11 14H23C23.5523 14 24 14.4477 24 15Z" fill="black"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 32C12.0899 32 15 29.0899 15 25.5C15 21.9101 12.0899 19 8.5 19C4.91015 19 2 21.9101 2 25.5C2 29.0899 4.91015 32 8.5 32ZM11.6464 22.6464C11.8417 22.4512 12.1583 22.4512 12.3536 22.6464C12.5488 22.8417 12.5488 23.1583 12.3536 23.3536L7.35355 28.3536C7.15829 28.5488 6.84171 28.5488 6.64645 28.3536L4.64645 26.3536C4.45118 26.1583 4.45118 25.8417 4.64645 25.6464C4.84171 25.4512 5.15829 25.4512 5.35355 25.6464L7 27.2929L11.6464 22.6464Z" fill="black"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M6 5C6 3.34315 7.34315 2 9 2H19.1716C19.9672 2 20.7303 2.31607 21.2929 2.87868L27.1213 8.70711C27.6839 9.26972 28 10.0328 28 10.8284V27C28 28.6569 26.6569 30 25 30H15.1153C15.5319 29.3887 15.866 28.7167 16.1016 28H25C25.5523 28 26 27.5523 26 27V12H21C19.3431 12 18 10.6569 18 9V4H9C8.44772 4 8 4.44772 8 5V17.5154C7.30565 17.5582 6.63526 17.6896 6 17.8984V5ZM21 10H25.5858L20 4.41421V9C20 9.55228 20.4477 10 21 10Z" stroke="white" stroke-width="0.7"/>
+  <path d="M19 24H16.3596C16.2261 23.2964 16.0005 22.6254 15.6958 22H19C19.5523 22 20 22.4477 20 23C20 23.5523 19.5523 24 19 24Z" stroke="white" stroke-width="0.7"/>
+  <path d="M23 20H14.3095C13.4768 19.1208 12.4467 18.4304 11.2901 18H23C23.5523 18 24 18.4477 24 19C24 19.5523 23.5523 20 23 20Z" stroke="white" stroke-width="0.7"/>
+  <path d="M24 15C24 15.5523 23.5523 16 23 16H11C10.4477 16 10 15.5523 10 15C10 14.4477 10.4477 14 11 14H23C23.5523 14 24 14.4477 24 15Z" stroke="white" stroke-width="0.7"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M8.5 32C12.0899 32 15 29.0899 15 25.5C15 21.9101 12.0899 19 8.5 19C4.91015 19 2 21.9101 2 25.5C2 29.0899 4.91015 32 8.5 32ZM11.6464 22.6464C11.8417 22.4512 12.1583 22.4512 12.3536 22.6464C12.5488 22.8417 12.5488 23.1583 12.3536 23.3536L7.35355 28.3536C7.15829 28.5488 6.84171 28.5488 6.64645 28.3536L4.64645 26.3536C4.45118 26.1583 4.45118 25.8417 4.64645 25.6464C4.84171 25.4512 5.15829 25.4512 5.35355 25.6464L7 27.2929L11.6464 22.6464Z" stroke="white" stroke-width="0.7"/>
+</svg>
+                        </span>
+                        <span class="site-controls">
+                            <h4>{{#if settings.dc_toggle}}
+                                {{dc'custom_block_6_title'}}
+                            {{else}}
+                                {{settings.custom_block_6_title}}
+                            {{/if}}
+                            </h4>
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M16.2673 19.7924C15.9674 20.0781 15.4926 20.0666 15.2069 19.7666C14.9213 19.4667 14.9328 18.992 15.2327 18.7063L21.4841 12.7517L0.75 12.7517C0.335787 12.7517 0 12.4159 0 12.0017C0 11.5875 0.335787 11.2517 0.75 11.2517L21.4842 11.2517L15.2327 5.29697C14.9328 5.01129 14.9213 4.53655 15.2069 4.23663C15.4926 3.9367 15.9674 3.92516 16.2673 4.21084L23.6862 11.2775C23.8551 11.4385 23.9551 11.6437 23.9861 11.8571C23.9952 11.9039 24 11.9522 24 12.0017C24 12.0512 23.9952 12.0997 23.986 12.1466C23.955 12.3598 23.855 12.5649 23.6862 12.7257L16.2673 19.7924Z" fill="#6610F2"/>
+</svg>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            {{/if}}
+
+            {{#if settings.custom_block_7_toggle}}
+                <div class="site-block">
+                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
+                            'custom_block_7_url'}}{{else}}{{settings.custom_block_7_url}}{{/if}}">
+                        <span class="site-icon">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" fill="none">
+  <path d="M7.93119 15.0572C7.87071 14.845 7.79003 14.6382 7.68983 14.4399C7.44337 13.9522 7.08577 13.5292 6.64583 13.205L5.22383 12.156C5.73917 10.669 6.53638 9.2952 7.57182 8.10999L9.17183 8.81C9.61283 9.00473 10.0897 9.10489 10.5718 9.104C11.4303 9.10131 12.2579 8.78319 12.8971 8.21014C13.5363 7.6371 13.9427 6.84909 14.0388 5.996L14.2328 4.24899C15.0065 4.09944 15.7919 4.01913 16.5798 4.009C17.3617 4.01892 18.1412 4.09889 18.9088 4.24799L19.0958 5.98801C19.1882 6.84201 19.5932 7.63164 20.2328 8.20499C20.7333 8.64794 21.3494 8.93955 22.0093 9.04578C22.6691 9.15201 23.3456 9.0685 23.9598 8.80499L25.5598 8.10501C26.5964 9.29 27.394 10.6642 27.9088 12.152L26.4868 13.198C26.0446 13.5211 25.6849 13.9439 25.4369 14.4322C25.1889 14.9205 25.0597 15.4604 25.0597 16.008C25.0597 16.5556 25.1889 17.0955 25.4369 17.5838C25.6849 18.0721 26.0446 18.4949 26.4868 18.818L27.9088 19.867C27.3937 21.3527 26.598 22.7256 25.5648 23.911L23.9648 23.211C23.4642 22.9882 22.918 22.887 22.3708 22.9157C21.8236 22.9444 21.2909 23.1022 20.8164 23.3761C20.3418 23.6501 19.9388 24.0324 19.6403 24.4919C19.3418 24.9514 19.1563 25.4751 19.0988 26.02L18.9058 27.771C17.9588 27.9653 16.9936 28.0403 16.0325 27.9961L16.0392 28.0035L16.2679 28.2322C16.7564 28.7207 17.0005 29.3611 17.0001 30.0014C17.9167 29.9707 18.8282 29.8477 19.7208 29.634C20.0177 29.5638 20.2855 29.4035 20.4877 29.175C20.6898 28.9466 20.8163 28.6612 20.8498 28.358L21.0848 26.228C21.1184 25.877 21.2769 25.5498 21.5314 25.3058C21.786 25.0619 22.1197 24.9175 22.4718 24.899C22.705 24.8892 22.9372 24.933 23.1508 25.027L25.1058 25.884C25.2926 25.9661 25.4943 26.0085 25.6983 26.0085C25.9023 26.0085 26.1041 25.9661 26.2908 25.884C26.475 25.8039 26.6405 25.6864 26.7768 25.539C28.2213 23.9826 29.2996 22.1229 29.9328 20.096C30.0234 19.8028 30.0206 19.4887 29.9248 19.1972C29.8289 18.9057 29.6448 18.6512 29.3978 18.469L27.6688 17.194C27.3842 16.9868 27.1826 16.685 27.1003 16.3427C27.018 16.0004 27.0604 15.6399 27.2198 15.326C27.3267 15.1168 27.4816 14.9359 27.6718 14.798L29.3918 13.527C29.6403 13.3454 29.8257 13.0905 29.922 12.7982C30.0183 12.5059 30.0207 12.1908 29.9288 11.897C29.2966 9.86977 28.2178 8.01011 26.7718 6.45499C26.5627 6.23143 26.2895 6.07821 25.9897 6.01642C25.6899 5.95463 25.3783 5.98732 25.0978 6.10999L23.1518 6.966C22.9385 7.05898 22.7064 7.10046 22.4741 7.0871C22.2418 7.07373 22.0159 7.00589 21.8146 6.88907C21.6134 6.77225 21.4425 6.60971 21.3157 6.41461C21.1889 6.21951 21.1098 5.99732 21.0848 5.76599L20.8488 3.646C20.8158 3.33905 20.6874 3.05019 20.4817 2.82004C20.2759 2.58989 20.0032 2.43005 19.7018 2.36301C18.675 2.13357 17.6269 2.0119 16.5748 2C15.5165 2.01252 14.4622 2.13418 13.4288 2.36301C13.1269 2.42937 12.8536 2.58929 12.6478 2.82001C12.4416 3.04857 12.3134 3.33679 12.2818 3.64301L12.0448 5.76498C12.0189 5.99666 11.9392 6.21906 11.8119 6.41437C11.6846 6.60967 11.5133 6.77245 11.3118 6.88968C11.1103 7.00691 10.8842 7.07533 10.6515 7.08945C10.4188 7.10357 10.186 7.06301 9.97183 6.97101L8.02583 6.11398C7.84072 6.03507 7.64155 5.99442 7.44032 5.99442C7.23909 5.99442 7.03994 6.03507 6.85483 6.11398C6.66508 6.19361 6.49459 6.31296 6.35483 6.46399C4.90882 8.02099 3.82946 9.88178 3.19583 11.91C3.1056 12.203 3.10872 12.5168 3.20475 12.808C3.30079 13.0991 3.48498 13.3532 3.73182 13.535L5.45683 14.807C5.57145 14.8913 5.67249 14.991 5.75758 15.1025C6.16174 15.0351 6.57683 15 7.00012 15C7.3154 15 7.62613 15.0195 7.93119 15.0572Z" fill="black"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M11.5646 16.009C11.5646 13.2476 13.8032 11.009 16.5646 11.009C19.326 11.009 21.5646 13.2476 21.5646 16.009C21.5646 18.7704 19.326 21.009 16.5646 21.009C15.7124 21.009 14.9101 20.7958 14.2079 20.4199C13.7627 18.8745 12.8339 17.5339 11.596 16.5727C11.5752 16.3876 11.5646 16.1996 11.5646 16.009ZM16.5646 13.009C14.9077 13.009 13.5646 14.3521 13.5646 16.009C13.5646 17.6659 14.9077 19.009 16.5646 19.009C18.2214 19.009 19.5646 17.6659 19.5646 16.009C19.5646 14.3521 18.2214 13.009 16.5646 13.009Z" fill="black"/>
+  <path fill-rule="evenodd" clip-rule="evenodd" d="M10.4765 27.3907C9.49572 28.0892 8.29583 28.5 7 28.5C3.68629 28.5 1 25.8137 1 22.5C1 19.1863 3.68629 16.5 7 16.5C10.3137 16.5 13 19.1863 13 22.5C13 23.7958 12.5892 24.9957 11.8907 25.9765L15.2071 29.2929C15.5976 29.6834 15.5976 30.3166 15.2071 30.7071C14.8166 31.0976 14.1834 31.0976 13.7929 30.7071L10.4765 27.3907ZM3 22.5C3 24.7091 4.79086 26.5 7 26.5C9.20914 26.5 11 24.7091 11 22.5C11 20.2909 9.20914 18.5 7 18.5C4.79086 18.5 3 20.2909 3 22.5Z" fill="black"/>
+  <path d="M16.2679 28.2322L16.0392 28.0035L16.0325 27.9961C16.9936 28.0403 17.9588 27.9653 18.9058 27.771L19.0988 26.02C19.1563 25.4751 19.3418 24.9514 19.6403 24.4919C19.9388 24.0324 20.3418 23.6501 20.8164 23.3761C21.2909 23.1022 21.8236 22.9444 22.3708 22.9157C22.918 22.887 23.4642 22.9882 23.9648 23.211L25.5648 23.911C26.598 22.7256 27.3937 21.3527 27.9088 19.867L26.4868 18.818C26.0446 18.4949 25.6849 18.0721 25.4369 17.5838C25.1889 17.0955 25.0597 16.5556 25.0597 16.008C25.0597 15.4604 25.1889 14.9205 25.4369 14.4322C25.6849 13.9439 26.0446 13.5211 26.4868 13.198L27.9088 12.152C27.394 10.6642 26.5964 9.29 25.5598 8.10501L23.9598 8.80499C23.3456 9.0685 22.6691 9.15201 22.0093 9.04578C21.3494 8.93955 20.7333 8.64794 20.2328 8.20499C19.5932 7.63164 19.1882 6.84201 19.0958 5.98801L18.9088 4.24799C18.1412 4.09889 17.3617 4.01892 16.5798 4.009C15.7919 4.01913 15.0065 4.09944 14.2328 4.24899L14.0388 5.996C13.9427 6.84909 13.5363 7.6371 12.8971 8.21014C12.2579 8.78319 11.4303 9.10131 10.5718 9.104C10.0897 9.10489 9.61283 9.00473 9.17183 8.81L7.57182 8.10999C6.53638 9.2952 5.73917 10.669 5.22383 12.156L6.64583 13.205C7.08577 13.5292 7.44337 13.9522 7.68983 14.4399C7.79003 14.6382 7.87071 14.845 7.93119 15.0572C7.62613 15.0195 7.3154 15 7.00012 15C6.57683 15 6.16174 15.0351 5.75758 15.1025C5.67249 14.991 5.57145 14.8913 5.45683 14.807L3.73182 13.535C3.48498 13.3532 3.30079 13.0991 3.20475 12.808C3.10872 12.5168 3.1056 12.203 3.19583 11.91C3.82946 9.88178 4.90882 8.02099 6.35483 6.46399C6.49459 6.31296 6.66508 6.19361 6.85483 6.11398C7.03994 6.03507 7.23909 5.99442 7.44032 5.99442C7.64155 5.99442 7.84072 6.03507 8.02583 6.11398L9.97183 6.97101C10.186 7.06301 10.4188 7.10357 10.6515 7.08945C10.8842 7.07533 11.1103 7.00691 11.3118 6.88968C11.5133 6.77245 11.6846 6.60967 11.8119 6.41437C11.9392 6.21906 12.0189 5.99666 12.0448 5.76498L12.2818 3.64301C12.3134 3.33679 12.4416 3.04857 12.6478 2.82001C12.8536 2.58929 13.1269 2.42937 13.4288 2.36301C14.4622 2.13418 15.5165 2.01252 16.5748 2C17.6269 2.0119 18.675 2.13357 19.7018 2.36301C20.0032 2.43005 20.2759 2.58989 20.4817 2.82004C20.6874 3.05019 20.8158 3.33905 20.8488 3.646L21.0848 5.76599C21.1098 5.99732 21.1889 6.21951 21.3157 6.41461C21.4425 6.60971 21.6134 6.77225 21.8146 6.88907C22.0159 7.00589 22.2418 7.07373 22.4741 7.0871C22.7064 7.10046 22.9385 7.05898 23.1518 6.966L25.0978 6.10999C25.3783 5.98732 25.6899 5.95463 25.9897 6.01642C26.2895 6.07821 26.5627 6.23143 26.7718 6.45499C28.2178 8.01011 29.2966 9.86977 29.9288 11.897C30.0207 12.1908 30.0183 12.5059 29.922 12.7982C29.8257 13.0905 29.6403 13.3454 29.3918 13.527L27.6718 14.798C27.4816 14.9359 27.3267 15.1168 27.2198 15.326C27.0604 15.6399 27.018 16.0004 27.1003 16.3427C27.1826 16.685 27.3842 16.9868 27.6688 17.194L29.3978 18.469C29.6448 18.6512 29.8289 18.9057 29.9248 19.1972C30.0206 19.4887 30.0234 19.8028 29.9328 20.096C29.2996 22.1229 28.2213 23.9826 26.7768 25.539C26.6405 25.6864 26.475 25.8039 26.2908 25.884C26.1041 25.9661 25.9023 26.0085 25.6983 26.0085C25.4943 26.0085 25.2926 25.9661 25.1058 25.884L23.1508 25.027C22.9372 24.933 22.705 24.8892 22.4718 24.899C22.1197 24.9175 21.786 25.0619 21.5314 25.3058C21.2769 25.5498 21.1184 25.877 21.0848 26.228L20.8498 28.358C20.8163 28.6612 20.6898 28.9466 20.4877 29.175C20.2855 29.4035 20.0177 29.5638 19.7208 29.634C18.8282 29.8477 17.9167 29.9707 17.0001 30.0014C17.0005 29.3611 16.7564 28.7207 16.2679 28.2322ZM16.2679 28.2322L16.2424 28.2577M16.5646 11.009C13.8032 11.009 11.5646 13.2476 11.5646 16.009C11.5646 16.1996 11.5752 16.3876 11.596 16.5727C12.8339 17.5339 13.7627 18.8745 14.2079 20.4199C14.9101 20.7958 15.7124 21.009 16.5646 21.009C19.326 21.009 21.5646 18.7704 21.5646 16.009C21.5646 13.2476 19.326 11.009 16.5646 11.009ZM13.5646 16.009C13.5646 14.3521 14.9077 13.009 16.5646 13.009C18.2214 13.009 19.5646 14.3521 19.5646 16.009C19.5646 17.6659 18.2214 19.009 16.5646 19.009C14.9077 19.009 13.5646 17.6659 13.5646 16.009ZM7 28.5C8.29583 28.5 9.49572 28.0892 10.4765 27.3907L13.7929 30.7071C14.1834 31.0976 14.8166 31.0976 15.2071 30.7071C15.5976 30.3166 15.5976 29.6834 15.2071 29.2929L11.8907 25.9765C12.5892 24.9957 13 23.7958 13 22.5C13 19.1863 10.3137 16.5 7 16.5C3.68629 16.5 1 19.1863 1 22.5C1 25.8137 3.68629 28.5 7 28.5ZM7 26.5C4.79086 26.5 3 24.7091 3 22.5C3 20.2909 4.79086 18.5 7 18.5C9.20914 18.5 11 20.2909 11 22.5C11 24.7091 9.20914 26.5 7 26.5Z" stroke="white" stroke-width="0.7"/>
+</svg>
+                      </span>
+                        <span class="site-controls">
+                            <h4>{{#if settings.dc_toggle}}
+                                {{dc'custom_block_7_title'}}
+                            {{else}}
+                                {{settings.custom_block_7_title}}
+                            {{/if}}
+                            </h4>
+                            <span class="icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M16.2673 19.7924C15.9674 20.0781 15.4926 20.0666 15.2069 19.7666C14.9213 19.4667 14.9328 18.992 15.2327 18.7063L21.4841 12.7517L0.75 12.7517C0.335787 12.7517 0 12.4159 0 12.0017C0 11.5875 0.335787 11.2517 0.75 11.2517L21.4842 11.2517L15.2327 5.29697C14.9328 5.01129 14.9213 4.53655 15.2069 4.23663C15.4926 3.9367 15.9674 3.92516 16.2673 4.21084L23.6862 11.2775C23.8551 11.4385 23.9551 11.6437 23.9861 11.8571C23.9952 11.9039 24 11.9522 24 12.0017C24 12.0512 23.9952 12.0997 23.986 12.1466C23.955 12.3598 23.855 12.5649 23.6862 12.7257L16.2673 19.7924Z" fill="#6610F2"/>
+</svg>
+                            </span>
+                        </span>
+                    </a>
+                </div>
+            {{/if}}
+        </div>
+    </div>
+
+    <!--  Modified Robot Banner  -->
+    <div class="content-container container-wrapper">
+        <a href="https://support.sharkclean.com/hc/en-us/articles/8526345569180-Robot-App-Language-Setting-in-App-Update"
+           class="app-banner-wrapper">
+            <div class="app-banner hide-in-mobile">
+                <img src={{asset 'SharkIcon_transparent.png'}}>
+                <div class="app-banner-title">
+                    <h2 style="text-align: center; font-weight:bold;">SharkNinja Robot App Update</h2>
+                    <h2 style="text-align: center; font-weight:bold;">Consumer Action Needed</h2>
+                </div>
+                <img src={{asset 'shark-robotics.png'}} >
+            </div>
+            <div class="app-banner hide-in-desktop">
+                <div class="app-banner-title">
+                    <h2 style="text-align: center; font-weight:bold;">SharkNinja Robot App Update</h2>
+                    <h2 style="text-align: center; font-weight:bold;">Consumer Action Needed</h2>
+                </div>
+                <div class="app-banner-icon">
+                    <img src={{asset 'SharkIcon_transparent.png'}}>
+                    <img src={{asset 'shark-robotics.png'}} >
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="content-container container-wrapper">
+        {{#if settings.show_categories_toggle}}
+            <section class="content-base content-category">
+                <h3 class="content-header">{{t'categories'}}</h3>
+                <div id="content-parent" class="content-wrapper">
+                    <div id="left-col">
+                        {{#each categories}}
+                            {{#isnt name 'Product Information & FAQs'}}
+                                {{#isnt name 'Troubleshooting'}}
+                                    {{#isnt name 'Order Status'}}
+                                        {{#isnt name 'Warranty & Returns'}}
+                                            {{#isnt name 'Contact Us'}}
+                                                {{#isnt name 'Order Status / Delivery'}}
+
+                                                    {{#if ../has_multiple_categories}}
+                                                        <div class="content-block" data-category="{{name}}">
+                                                            <a data-parent="#accordion" data-toggle="collapse"
+                                                               data-target="#{{name}}" class="content-link"
+                                                               aria-expanded="false" aria-controls="#{{name}}">
+                                                                <div class="content-link-title">{{name}}</div>
+                                                                <i class="fa"></i>
+                                                            </a>
+                                                            <div id="{{name}}" class="content-section collapse">
+                                                                <p class="content-link-description">{{description}}</p>
+                                                                <ul class="content-list">
+                                                                    {{#each sections}}
+                                                                        <li><a href="{{url}}">{{name}}</a></li>
+                                                                    {{/each}}
+                                                                    {{#if more_sections}}
+                                                                        <a href="{{url}}" class="all-article">
+                                                                            {{t 'see_all_sections'}}
+                                                                        </a>
+                                                                    {{/if}}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    {{else}}
+                                                        {{#each sections}}
+                                                            <div class="content-block">
+                                                                <a data-toggle="collapse" data-target="#{{name}}"
+                                                                   class="content-link" aria-expanded="false">
+                                                                    <div class="content-link-title">{{name}}</div>
+                                                                    <i class="fa"></i>
+                                                                </a>
+                                                                <div id="{{name}}" class="content-section collapse">
+                                                                    <p class="content-link-description">{{description}}</p>
+                                                                    <ul class="content-list">
+                                                                        {{#each articles}}
+                                                                            <li><a href="{{url}}">{{title}}</a></li>
+                                                                        {{/each}}
+                                                                        {{#if more_articles}}
+                                                                            <a href="{{url}}" class="all-article">
+                                                                                {{t 'show_all_articles'
+                                                                                    count=article_count}}
+                                                                            </a>
+                                                                        {{/if}}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        {{/each}}
+                                                    {{/if}}
+                                                {{/isnt}}{{/isnt}}{{/isnt}}{{/isnt}}{{/isnt}}{{/isnt}}
+                        {{/each}}
+                    </div>
+                    <div id="right-col">
+                        {{#each categories}}
+                            {{#isnt name 'Product Information & FAQs'}}
+                                {{#isnt name 'Troubleshooting'}}
+                                    {{#isnt name 'Order Status'}}
+                                        {{#isnt name 'Warranty & Returns'}}
+                                            {{#isnt name 'Contact Us'}}
+                                                {{#isnt name 'Order Status / Delivery'}}
+
+                                                    {{#if ../has_multiple_categories}}
+                                                        <div class="content-block" data-category="{{name}}">
+                                                            <a data-parent="#accordion" data-toggle="collapse"
+                                                               data-target="#{{name}}" class="content-link"
+                                                               aria-expanded="false" aria-controls="#{{name}}">
+                                                                <div class="content-link-title">{{name}}</div>
+                                                                <i class="fa"></i>
+                                                            </a>
+                                                            <div id="{{name}}" class="content-section collapse">
+                                                                <p class="content-link-description">{{description}}</p>
+                                                                <ul class="content-list">
+                                                                    {{#each sections}}
+                                                                        <li><a href="{{url}}">{{name}}</a></li>
+                                                                    {{/each}}
+                                                                    {{#if more_sections}}
+                                                                        <a href="{{url}}" class="all-article">
+                                                                            {{t 'see_all_sections'}}
+                                                                        </a>
+                                                                    {{/if}}
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    {{else}}
+                                                        {{#each sections}}
+                                                            <div class="content-block">
+                                                                <a data-toggle="collapse" data-target="#{{name}}"
+                                                                   class="content-link" aria-expanded="false">
+                                                                    <div class="content-link-title">{{name}}</div>
+                                                                    <i class="fa"></i>
+                                                                </a>
+                                                                <div id="{{name}}" class="content-section collapse">
+                                                                    <p class="content-link-description">{{description}}</p>
+                                                                    <ul class="content-list">
+                                                                        {{#each articles}}
+                                                                            <li><a href="{{url}}">{{title}}</a></li>
+                                                                        {{/each}}
+                                                                        {{#if more_articles}}
+                                                                            <a href="{{url}}" class="all-article">
+                                                                                {{t 'show_all_articles'
+                                                                                    count=article_count}}
+                                                                            </a>
+                                                                        {{/if}}
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                        {{/each}}
+                                                    {{/if}}
+
+                                                {{/isnt}}{{/isnt}}{{/isnt}}{{/isnt}}{{/isnt}}{{/isnt}}
+                        {{/each}}
+                    </div>
+                </div>
+            </section>
+        {{/if}}
+
+        {{#if settings.videos_toggle}}
+            <div class="site-video">
+                <h3 class="content-header">
+                    {{#if settings.dc_toggle}}
+                        {{dc 'video_section_title'}}
+                    {{else}}
+                        {{settings.video_section_title}}
+                    {{/if}}
+                </h3>
+                <span data-action="slideLeft" class="button-carousel">&#139;</span>
+                <span data-action="slideRight" class="button-carousel">&#155;</span>
+                <div class="site-video-items" id="carousel">
+                    {{#if settings.video_block_1}}
+                        <a {{#is settings.video_block_1_list 'Other'}}target="_blank"href="{{#if
+                                settings.dc_toggle}}{{dc'video_block_1_id'}}{{else}}{{settings.video_block_1_id}}{{/if}}"{{/is}}
+                                                                                     class="site-video-item carousel-item" {{#is
+                                settings.video_block_1_list 'Embed Video'}}data-src="{{settings.video_block_1_id}}"
+                                                                                     data-toggle="modal"
+                                                                                     data-target="#video-modal"{{/is}}>
+                            <div class="site-video-img{{#if settings.show_play_button_1}} site-video-icon{{/if}}"
+                                 style="background-image: url({{settings.video_block_1_img}});">
+
+                            </div>
+                            <div class="site-video-title">
+                                {{#if settings.dc_toggle}}
+                                    {{dc'video_block_1_title'}}
+                                {{else}}
+                                    {{settings.video_block_1_title}}
+                                {{/if}}
+                            </div>
+                        </a>
+                    {{/if}}
+                </div>
+            </div>
+        {{/if}}
+
+        {{#if promoted_articles}}
+            {{#is settings.promoted_articles_style 'accordion'}}
+                <section class="content-base homepage-articles promoted-accordion">
+                    <div class="container">
+                        <div class="container-wrapper">
+                            <h2 class="content-header">{{t 'promoted_articles'}}</h2>
+                            <div id="accordion">
+                                {{#each promoted_articles}}
+                                    <div class="promoted-articles">
+                                        <div class="promoted-articles_title">
+                                            <a data-toggle="collapse" data-target="#{{id}}" aria-expanded="false"
+                                               data-parent="#accordion" data-target="#{{id}}" aria-controls="{{id}}"><h3
+                                                    style="max-width:90%;">{{title}}</h3>
+                                                <div class="collapse_icon"><span></span><span></span></div>
+                                            </a>
+                                        </div>
+                                        <div id="{{id}}" class="collapse py-2">
+                                            <div class="promoted-articles-wrapper">
+                                                <div class="promoted-articles_body">
+                                                    {{body}}
+                                                </div>
+                                                <a href="{{url}}" class="btn promoted-articles-btn">{{t 'see_more'}}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            {{/is}}
+            {{#is settings.promoted_articles_style 'column'}}
+                <section class="content-base homepage-articles">
+                    <h3>{{t 'promoted_articles'}}</h3>
+                    <ul class="article-list promoted-articles">
+                        {{#each promoted_articles}}
+                            <li>
+                                <a href="{{url}}">
+                                    {{title}}
+                                </a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </section>
+            {{/is}}
+        {{/if}}
+        {{#is settings.promoted_articles_style 'none'}}{{/is}}
+
+        {{#if settings.show_recent_activity_toggle}}
+            <section class="content-base homepage-articles">
+                {{recent_activity}}
+            </section>
+        {{/if}}
+
+    </div>
 </div>
+
+<div class="modal fade" id="video-modal" tabindex="-1" role="dialog" aria-labelledby="site-video-modal"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+
+            <div class="modal-body">
+
+                <div type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </div>
+                <!-- 16:9 aspect ratio -->
+                <div class="embed-responsive embed-responsive-16by9">
+                    <iframe class="embed-responsive-item" src="" id="video" allowscriptaccess="always"
+                            allow="autoplay"></iframe>
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<template id="video-block">
+    <a class="site-video-item carousel-item" data-toggle="modal" data-target="#video-modal">
+        <div class="site-video-img site-video-icon">
+
+        </div>
+        <div class="site-video-title">
+
+        </div>
+    </a>
+</template>
+<script>
+    console.log($(window).width())
+        {{#if settings.videos_toggle}}
+        $(document).ready(function () {
+            $.when(loadVideo('{{settings.video_id_arrays}}')).done(function () {
+                carouselVideo()
+                $(window).resize(function () {
+                    carouselVideo()
+                })
+            })
+        })
+        {{/if}}
+</script>
+
+<script>
+    function getElementsById(id) {
+        const elementsWithId = []
+        const allElements = document.getElementsByTagName('*')
+        for (let key in allElements) {
+            if (allElements.hasOwnProperty(key)) {
+                const element = allElements[key]
+                if (element.id == id) {
+                    elementsWithId.push(element)
+                }
+            }
+        }
+        return elementsWithId
+    }
+
+    function a(ids) {
+        return [ids].map(id => document.getElementById(id));
+    }
+
+    $(document).ready(function () {
+        console.log(a({{settings.category_ids}}))
+        let owlOptions = {
+            items: 1,
+            dots: false,
+            loop: true,
+            slideTransition: 'linear',
+            autoplay: {{settings.hero_carousel_autoplay}},
+            autoplayTimeout: "{{settings.hero_carousel_timeout}}",
+            autoplayHoverPause: true,
+            nav: true,
+            navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>']
+        }
+
+        $("#hero-carousel").owlCarousel(owlOptions);
+    });
+
+    $(document).ready(function () {
+        let owlOptionsHomepage = {
+            items: 1,
+            dots: false,
+            loop: true,
+            slideTransition: 'linear',
+            autoplay: {{ settings.info_box_carousel_autoplay }},
+            autoplayTimeout: "{{settings.info_box_carousel_timeout}}",
+            autoplayHoverPause: true,
+            nav: true,
+            navText: ['<div class="button-info-box"><i class="fa fa-angle-left info-box-prev" aria-hidden="true"></i></div>', '<div class="button-info-box"><i class="fa fa-angle-right info-box-next" aria-hidden="true"></i></div>']
+        }
+
+        $("#homepage-carousel").owlCarousel(owlOptionsHomepage);
+    });
+</script>
+<script>
+    $(function () {
+        $('.owl-carousel').owlCarousel({
+            items: 3,
+            stagePadding: 30
+        })
+    })
+
+    if ($('.site-video-items').children().length === 0) {
+        $('.site-video').hide();
+    }
+</script>

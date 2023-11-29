@@ -1,88 +1,70 @@
-<div class="my-activities-nav">
+<script>
+  $('#site-header').show();
+</script>
+<div class="my-activities-nav">  
   <div class="container">
-    <nav class="collapsible-nav">
-      <button type="button" class="collapsible-nav-toggle" aria-label="{{t 'toggle_navigation'}}" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon chevron-icon">
-          <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-        </svg>
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon x-icon">
-          <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
-        </svg>
-      </button>
-      <ul class="collapsible-nav-list">
-        <li class="current">
-          <a href="{{page_path 'contributions'}}" aria-current="page">{{ t 'contributions' }}</a>
-        </li>
-        <li>{{link 'subscriptions'}}</li>
-      </ul>
-    </nav>
+    <div class="container-wrapper">
+      <h1>{{t 'my_activities'}}</h1>
+      <nav class="my-activities-dropdown my-activities-dropdown-main">
+        <ul class="my-activities-dropdown-items list-unstyled">
+          <li class="my-activities-dropdown-item">{{link 'requests'}}</li>
+          <li class="my-activities-dropdown-item is-active">{{t 'contributions'}}</li>
+          <li class="my-activities-dropdown-item">{{link 'subscriptions'}}</li>
+        </ul>
+      </nav>
+    </div>
   </div>
 </div>
 
 <div class="container">
-  <header class="my-activities-header">
-    <h1>{{t 'contributions'}}</h1>
+  <div class="container-wrapper">
 
-    <div class="my-activities-sub-nav">
-      <nav class="collapsible-nav collapsible-nav-border">
-        <button type="button" class="collapsible-nav-toggle" aria-label="{{t 'toggle_navigation'}}" aria-expanded="false">
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon chevron-icon">
-            <path fill="none" stroke="currentColor" stroke-linecap="round" d="M3 4.5l2.6 2.6c.2.2.5.2.7 0L9 4.5"/>
-          </svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" focusable="false" viewBox="0 0 12 12" aria-hidden="true" class="collapsible-nav-toggle-icon x-icon">
-            <path stroke="currentColor" stroke-linecap="round" d="M3 9l6-6m0 6L3 3"/>
-          </svg>
-        </button>
-        <ul class="collapsible-nav-list">
-          {{#each filters}}
-            {{#if selected}}
-              <li class="current">
-                <a href="{{url}}" aria-current="page">{{name}}</a>
-              </li>
-            {{else}}
-              <li>
-                <a href="{{url}}">{{name}}</a>
-              </li>
-            {{/if}}
-          {{/each}}
-        </ul>
-      </nav>
-    </div>
-  </header>
+    <nav class="my-activities-dropdown my-activities-dropdown-sub">
+      <ul class="my-activities-dropdown-items list-unstyled">
+      {{#each filters}}
+        {{#if selected}}
+        <li class="my-activities-dropdown-item is-active">
+          {{name}}
+        </li>
+        {{else}}
+        <li class="my-activities-dropdown-item">
+          <a href="{{url}}">{{name}}</a>
+        </li>
+        {{/if}}
+      {{/each}}
+      </ul>
+    </nav>
 
-  <div id="main-content" class="requests">
     {{#if contributions}}
-      <table class="table my-activities-table contributions-table">
-        <thead>
-          <tr>
-            <th>{{t 'title'}}</th>
-            <th>{{t 'type'}}</th>
-            <th>{{t 'vote_sum'}}</th>
-            <th>{{t 'last_activity'}}</th>
-            <th>{{t 'created'}}</th>
+      <table class="my-activities-lists">
+        <thead class="my-activities-lists-head">
+          <tr class="my-activities-lists-row">
+            <th class="my-activities-lists-col">{{t 'title'}}</div>
+            <th class="my-activities-lists-col">{{t 'vote_sum'}}</div>
+            <th class="my-activities-lists-col">{{t 'last_activity'}}</div>
+            <th class="my-activities-lists-col">{{t 'created'}}</div>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="my-activities-lists-body">
           {{#each contributions}}
-            <tr>
-              <td>
-                <a href="{{url}}" class="striped-list-title" title="{{title}}">
+            <tr class="my-activities-lists-row my-activities-list">
+              <td class="my-activities-lists-col">
+                <a class="my-activities-list-title" href="{{url}}">
                   {{excerpt title characters=60}}
                 </a>
               </td>
-              <td>{{type}}</td>
-              <td>{{vote_sum}}</td>
-              <td>{{date last_activity_at}}</td>
-              <td>{{date created_at}}</td>
+              <td class="my-activities-lists-col my-activities-list-meta">
+                <span class="fa fa-thumbs-up my-activities-list-icon"></span> {{vote_sum}}
+              </td>
+              <td class="my-activities-lists-col my-activities-list-meta">{{date last_activity_at}}</div>
+              <td class="my-activities-lists-col my-activities-list-meta">{{date created_at}}</div>
             </tr>
           {{/each}}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      {{pagination}}
     {{else}}
-      <p class="no-activities">{{t 'no_contributions'}}</p>
+      <p>{{t 'no_contributions'}}</p>
     {{/if}}
   </div>
-
-  {{pagination}}
-
 </div>
