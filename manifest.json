@@ -578,8 +578,7 @@
         {
           "identifier": "hero_image_file",
           "type": "file",
-          "description": "The recommended dimensions: 1600x1100px",
-          "label": "Banner image"
+          "label": "Hero image"
         },
         {
           "identifier": "hero_banner_gradient_value_1",
