@@ -5,7 +5,7 @@
 <div class="banner">
   <div class="banner-container">
     <h1 class="banner-title">{{category.name}}</h1>
-    <p class="banner-desc">{{category.description}}</p> 
+    <p class="banner-desc">{{category.description}}</p>
     <div class="container-wrapper search-container search-container-hero-item max-w-5xl w-full" data-hero-box>
       <div class="relative">
         {{search instant=true placeholder=settings.search_placeholder_text}}
@@ -19,7 +19,7 @@
 <div class="container category-container py-6">
   <div class="container-wrapper">
     <div class="site-header">
-      {{breadcrumbs}}        
+      {{breadcrumbs}}
     </div>
     {{#is category.name settings.category_name_1}}
     <section class="section knowledge-base">
@@ -193,11 +193,11 @@
         <ul>
           {{#each sections}}
           <li class="list-unstyled">
-            
+
             {{#isnt name 'Terms of Use'}}{{#isnt name 'Privacy Policy'}}{{#isnt name 'Accessibility'}}
             <a href="{{url}}" class="font-bold"><h3>{{name}}</h3></a>
             {{/isnt}}{{/isnt}}{{/isnt}}
-            
+
             {{#if articles}}
             <div class="section-tree-articles" style="margin-left: 2rem;">
             <ul>
@@ -338,15 +338,15 @@
               {{#is name 'Hair Care'}}<img class="product-thumbnail" alt="Vacuum Cleaners" src="{{asset 'HairCare-HD400Series.jpg'}}">{{/is}}
               {{#is name 'Hard Floor Cleaning & Irons'}}<img class="product-thumbnail" alt="Vacuum Cleaners" src="{{asset 'hard-floor-cleaning-and-irons.png'}}">{{/is}}
               {{#is name 'Hard Floor Cleaning'}}<img class="product-thumbnail" alt="Vacuum Cleaners" src="{{asset 'hard-floor-cleaning-and-irons.png'}}">{{/is}}
-              {{#is name 'Robots'}}<img class="product-thumbnail" alt="Robots" src="{{asset 'robot.png'}}">{{/is}} 
+              {{#is name 'Robots'}}<img class="product-thumbnail" alt="Robots" src="{{asset 'robot.png'}}">{{/is}}
               {{#is name 'Vacuums'}}<img class="product-thumbnail" alt="Vacuum Cleaners" src="{{asset 'vacuums.png'}}">{{/is}}
 
               {{#is name 'Vacuum Cleaners'}}<img class="product-thumbnail" alt="Vacuum Cleaners" src="{{asset 'vacuums.png'}}">{{/is}}
-              {{#is name 'Steam Mops'}}<img class="product-thumbnail" alt="Steam Mops" src="{{asset 'steamMops.png'}}">{{/is}}            
-              {{#is name 'Delivery'}}<img class="product-thumbnail" alt="Tracking Order" src="{{asset 'Trackorderr.png'}}">{{/is}} 
-              {{#is name 'Hair Dryer'}}<img class="product-thumbnail" alt="Hair Dryers" src="{{asset 'hairdryers.png'}}">{{/is}} 
-              
-              
+              {{#is name 'Steam Mops'}}<img class="product-thumbnail" alt="Steam Mops" src="{{asset 'steamMops.png'}}">{{/is}}
+              {{#is name 'Delivery'}}<img class="product-thumbnail" alt="Tracking Order" src="{{asset 'Trackorderr.png'}}">{{/is}}
+              {{#is name 'Hair Dryer'}}<img class="product-thumbnail" alt="Hair Dryers" src="{{asset 'hairdryers.png'}}">{{/is}}
+
+
               <h4 class="section-title-link text-center">{{name}}</h4>
               {{!-- ----------------------------------------------- --}}
             </a>

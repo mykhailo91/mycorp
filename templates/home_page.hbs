@@ -10,74 +10,8 @@
     $('.header-panel > a, .hc-name a').css({"color": "{{settings.hero_title_color}}"})
     $('.searchbar-top').css({'display': 'none'})
 </script>
-
-{{#if settings.hero_carousel}}
-    <div id="hero-carousel" class="owl-carousel owl-theme" style="overflow: hidden;">
-        {{#isnt settings.hero_carousel_text_1 ''}}
-            <div class="hero-item">
-                <div class="hero-background hero-background-carousel-1 {{#if
-                        settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
-                <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
-                    <div class="text-center">
-                        <div class="hero-title">
-                            {{settings.hero_carousel_text_1}}
-                        </div>
-                        <p class="hero-desc">
-                            {{settings.hero_carousel_desc_1}}
-                        </p>
-                        <a href="{{settings.hero_carousel_btn_link_1}}" class="hero-button btn btn-primary">
-                            {{settings.hero_carousel_btn_1}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {{/isnt}}
-
-        {{#isnt settings.hero_carousel_text_2 ''}}
-            <div class="hero-item">
-                <div class="hero-background hero-background-carousel-2 {{#if
-                        settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
-                <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
-                    <div class="text-center">
-                        <div class="hero-title">
-                            {{settings.hero_carousel_text_2}}
-                        </div>
-                        <p class="hero-desc">
-                            {{settings.hero_carousel_desc_2}}
-                        </p>
-                        <a href="{{settings.hero_carousel_btn_link_2}}" class="hero-button btn btn-primary">
-                            {{settings.hero_carousel_btn_2}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {{/isnt}}
-
-        {{#isnt settings.hero_carousel_text_3 ''}}
-            <div class="hero-item">
-                <div class="hero-background hero-background-carousel-3 {{#if
-                        settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
-                <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
-                    <div class="text-center">
-                        <div class="hero-title">
-                            {{settings.hero_carousel_text_3}}
-                        </div>
-                        <p class="hero-desc">
-                            {{settings.hero_carousel_desc_3}}
-                        </p>
-                        <a href="{{settings.hero_carousel_btn_link_3}}" class="hero-button btn btn-primary">
-                            {{settings.hero_carousel_btn_3}}
-                        </a>
-                    </div>
-                </div>
-            </div>
-        {{/isnt}}
-    </div>
-{{else}}
     <div class="hero-item">
-        <div class="hero-background {{#if settings.hero_banner_gradient_toggle}} hero-background-gradient {{/if}}{{#if
-                settings.hero_unit_bottom_gradient}}gradient{{/if}}" data-hero-background></div>
-        <div class="container-wrapper search-container search-container-hero-item" data-hero-box>
+        <div class="hero-item__search container-wrapper search-container search-container-hero-item" data-hero-box>
             <div class="hero-title">
                 {{#if settings.dc_toggle}}
                     {{dc 'intro_title_text'}}
@@ -85,15 +19,12 @@
                     {{settings.hero_title_text}}
                 {{/if}}
             </div>
-            <div class="relative">
-                {{search instant=true placeholder=settings.search_placeholder_text}}
-                <div class="searchbar-info" data-fancybox data-src="#findModel">
-                    <i class="fa fa-info-circle"></i>
-                </div>
-            </div>
+            {{search instant=true placeholder=settings.search_placeholder_text}}
+            <p class="hero-subtitle">
+                Where to find my model number?
+            </p>
         </div>
     </div>
-{{/if}}
 
 <div class="homepage-container light-bg">
     <div class="container-wrapper homepage-base">
@@ -133,190 +64,61 @@
                 </div>
             </section>
         {{/if}}
-        <div class="site-wrapper">
-      {{#if settings.custom_block_1_toggle}}
-      <div class="site-block" style="background-color: #60d8c5!important;">
-        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                'custom_block_1_url'}}{{else}}{{settings.custom_block_1_url}}{{/if}}">
-          <div class="site-icon site-icon-1"><img class="custom-block-image"src="{{settings.custom_block_1_icon}}" alt=""></div>
-          <h4>{{#if settings.dc_toggle}}
-            {{dc'custom_block_1_title'}}
-        {{else}}
-            {{settings.custom_block_1_title}}
-        {{/if}}
-          </h4>
-        </a>
-      </div>
-      {{/if}}
-
-            {{#if settings.custom_block_2_toggle}}
-      <div class="site-block">
-        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                    'custom_block_2_url'}}{{else}}{{settings.custom_block_2_url}}{{/if}}">
-          <div class="site-icon site-icon-2"><img class="custom-block-image"src="{{settings.custom_block_2_icon}}" alt=""></div>
-          <h4>{{#if settings.dc_toggle}}
-                {{dc'custom_block_2_title'}}
-            {{else}}
-                {{settings.custom_block_2_title}}
-            {{/if}}
-          </h4>
-        </a>
-      </div>
-      {{/if}}
-
-            {{#if settings.custom_block_3_toggle}}
-      <div class="site-block">
-        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                    'custom_block_3_url'}}{{else}}{{settings.custom_block_3_url}}{{/if}}">
-          <div class="site-icon site-icon-3"><img class="custom-block-image"src="{{settings.custom_block_3_icon}}" alt=""></div>
-          <h4>{{#if settings.dc_toggle}}
-                {{dc'custom_block_3_title'}}
-            {{else}}
-                {{settings.custom_block_3_title}}
-            {{/if}}
-          </h4>
-        </a>
-      </div>
-      {{/if}}
-
-            {{#if settings.custom_block_4_toggle}}
-      <div class="site-block">
-        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                    'custom_block_4_url'}}{{else}}{{settings.custom_block_4_url}}{{/if}}">
-          <div class="site-icon site-icon-4"><img class="custom-block-image"src="{{settings.custom_block_4_icon}}" alt=""></div>
-          <h4>{{#if settings.dc_toggle}}
-                {{dc'custom_block_4_title'}}
-            {{else}}
-                {{settings.custom_block_4_title}}
-            {{/if}}
-          </h4>
-        </a>
-      </div>
-      {{/if}}
-
-            {{#if settings.custom_block_5_toggle}}
-      <div class="site-block">
-        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                    'custom_block_5_url'}}{{else}}{{settings.custom_block_5_url}}{{/if}}">
-          <div class="site-icon site-icon-5"><img class="custom-block-image"src="{{settings.custom_block_5_icon}}" alt=""></div>
-          <h4>{{#if settings.dc_toggle}}
-                {{dc'custom_block_5_title'}}
-            {{else}}
-                {{settings.custom_block_5_title}}
-            {{/if}}
-          </h4>
-        </a>
-      </div>
-      {{/if}}
-
-            {{#if settings.custom_block_6_toggle}}
-      <div class="site-block">
-        <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                    'custom_block_6_url'}}{{else}}{{settings.custom_block_6_url}}{{/if}}">
-          <div class="site-icon site-icon-6"><img class="custom-block-image"src="{{settings.custom_block_6_icon}}" alt=""></div>
-          <h4>{{#if settings.dc_toggle}}
-                {{dc'custom_block_6_title'}}
-            {{else}}
-                {{settings.custom_block_6_title}}
-            {{/if}}
-          </h4>
-        </a>
-      </div>
-      {{/if}}
-
     </div>
-        <div class="site-wrapper-2">
-            {{#if settings.custom_block_new_1_toggle}}
-                <div class="site-block" style="background-color: #60d8c5!important;">
-                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                            'custom_block_new_1_url'}}{{else}}{{settings.custom_block_new_1_url}}{{/if}}">
-                        <div class="site-icon site-icon-1"><img class="custom-block-image"src="{{settings.custom_block_new_1_icon}}" alt=""></div>
-                        <h4>{{#if settings.dc_toggle}}
-                            {{dc'custom_block_new_1_title'}}
-                        {{else}}
-                            {{settings.custom_block_new_1_title}}
-                        {{/if}}
-                        </h4>
-                    </a>
-                </div>
-            {{/if}}
 
-            {{#if settings.custom_block_new_2_toggle}}
-                <div class="site-block">
-                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                            'custom_block_new_2_url'}}{{else}}{{settings.custom_block_new_2_url}}{{/if}}">
-                        <div class="site-icon site-icon-2"><img class="custom-block-image"src="{{settings.custom_block_new_2_icon}}" alt=""></div>
-                        <h4>{{#if settings.dc_toggle}}
-                            {{dc'custom_block_new_2_title'}}
-                        {{else}}
-                            {{settings.custom_block_new_2_title}}
-                        {{/if}}
-                        </h4>
-                    </a>
+    <div class="container-wrapper">
+        <!--General Topics component start -->
+        <div class="general-topics">
+            <a class="general-topic"
+               href="https://support.sharkclean.com/hc/en-us/articles/4401983044764-Order-Status">
+                <img class="general-topic__icon" src="{{asset 'general-topic_1_icon.png'}}" alt="order status & delivery">
+                <div class="general-topic__info">
+                    <h4>Order status / Delivery</h4>
+                    <span class="general-topic__action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M16.2673 19.7924C15.9674 20.0781 15.4926 20.0666 15.2069 19.7666C14.9213 19.4667 14.9328 18.992 15.2327 18.7063L21.4841 12.7517L0.75 12.7517C0.335787 12.7517 0 12.4159 0 12.0017C0 11.5875 0.335787 11.2517 0.75 11.2517L21.4842 11.2517L15.2327 5.29697C14.9328 5.01129 14.9213 4.53655 15.2069 4.23663C15.4926 3.9367 15.9674 3.92516 16.2673 4.21084L23.6862 11.2775C23.8551 11.4385 23.9551 11.6437 23.9861 11.8571C23.9952 11.9039 24 11.9522 24 12.0017C24 12.0512 23.9952 12.0997 23.986 12.1466C23.955 12.3598 23.855 12.5649 23.6862 12.7257L16.2673 19.7924Z" fill="#6610F2"/>
+</svg>
+                            </span>
                 </div>
-            {{/if}}
-
-            {{#if settings.custom_block_new_3_toggle}}
-                <div class="site-block">
-                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                            'custom_block_new_3_url'}}{{else}}{{settings.custom_block_new_3_url}}{{/if}}">
-                        <div class="site-icon site-icon-3"><img class="custom-block-image"src="{{settings.custom_block_new_3_icon}}" alt=""></div>
-                        <h4>{{#if settings.dc_toggle}}
-                            {{dc'custom_block_new_3_title'}}
-                        {{else}}
-                            {{settings.custom_block_new_3_title}}
-                        {{/if}}
-                        </h4>
-                    </a>
+            </a>
+            <a class="general-topic"
+               href="https://support.sharkclean.com/hc/en-us/categories/4402873078290-Warranty-Returns">
+                <img class="general-topic__icon" src="{{asset 'general-topic_2_icon.png'}}" alt=" warranty & returns">
+                <div class="general-topic__info">
+                    <h4>Warranty & Returns</h4>
+                    <span class="general-topic__action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M16.2673 19.7924C15.9674 20.0781 15.4926 20.0666 15.2069 19.7666C14.9213 19.4667 14.9328 18.992 15.2327 18.7063L21.4841 12.7517L0.75 12.7517C0.335787 12.7517 0 12.4159 0 12.0017C0 11.5875 0.335787 11.2517 0.75 11.2517L21.4842 11.2517L15.2327 5.29697C14.9328 5.01129 14.9213 4.53655 15.2069 4.23663C15.4926 3.9367 15.9674 3.92516 16.2673 4.21084L23.6862 11.2775C23.8551 11.4385 23.9551 11.6437 23.9861 11.8571C23.9952 11.9039 24 11.9522 24 12.0017C24 12.0512 23.9952 12.0997 23.986 12.1466C23.955 12.3598 23.855 12.5649 23.6862 12.7257L16.2673 19.7924Z" fill="#6610F2"/>
+</svg>
+                            </span>
                 </div>
-            {{/if}}
-
-            {{#if settings.custom_block_new_4_toggle}}
-                <div class="site-block">
-                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                            'custom_block_new_4_url'}}{{else}}{{settings.custom_block_new_4_url}}{{/if}}">
-                        <div class="site-icon site-icon-4"><img class="custom-block-image"src="{{settings.custom_block_new_4_icon}}" alt=""></div>
-                        <h4>{{#if settings.dc_toggle}}
-                            {{dc'custom_block_new_4_title'}}
-                        {{else}}
-                            {{settings.custom_block_new_4_title}}
-                        {{/if}}
-                        </h4>
-                    </a>
+            </a>
+            <a class="general-topic"
+               href="https://support.sharkclean.com/hc/en-us/categories/4402873069074-Troubleshooting">
+                <img class="general-topic__icon" src="{{asset 'general-topic_3_icon.png'}}" alt="find parts & accessories">
+                <div class="general-topic__info">
+                    <h4>Find Parts & Accessories</h4>
+                    <span class="general-topic__action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M16.2673 19.7924C15.9674 20.0781 15.4926 20.0666 15.2069 19.7666C14.9213 19.4667 14.9328 18.992 15.2327 18.7063L21.4841 12.7517L0.75 12.7517C0.335787 12.7517 0 12.4159 0 12.0017C0 11.5875 0.335787 11.2517 0.75 11.2517L21.4842 11.2517L15.2327 5.29697C14.9328 5.01129 14.9213 4.53655 15.2069 4.23663C15.4926 3.9367 15.9674 3.92516 16.2673 4.21084L23.6862 11.2775C23.8551 11.4385 23.9551 11.6437 23.9861 11.8571C23.9952 11.9039 24 11.9522 24 12.0017C24 12.0512 23.9952 12.0997 23.986 12.1466C23.955 12.3598 23.855 12.5649 23.6862 12.7257L16.2673 19.7924Z" fill="#6610F2"/>
+</svg>
+                            </span>
                 </div>
-            {{/if}}
-
-            {{#if settings.custom_block_new_5_toggle}}
-                <div class="site-block">
-                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                            'custom_block_new_5_url'}}{{else}}{{settings.custom_block_new_5_url}}{{/if}}">
-                        <div class="site-icon site-icon-5"><img class="custom-block-image"src="{{settings.custom_block_new_5_icon}}" alt=""></div>
-                        <h4>{{#if settings.dc_toggle}}
-                            {{dc'custom_block_new_5_title'}}
-                        {{else}}
-                            {{settings.custom_block_new_5_title}}
-                        {{/if}}
-                        </h4>
-                    </a>
+            </a>
+            <a class="general-topic"
+               href="#">
+                <img class="general-topic__icon" src="{{asset 'general-topic_4_icon.png'}}" alt="find parts & accessories">
+                <div class="general-topic__info">
+                    <h4>Recipes</h4>
+                    <span class="general-topic__action">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+  <path d="M16.2673 19.7924C15.9674 20.0781 15.4926 20.0666 15.2069 19.7666C14.9213 19.4667 14.9328 18.992 15.2327 18.7063L21.4841 12.7517L0.75 12.7517C0.335787 12.7517 0 12.4159 0 12.0017C0 11.5875 0.335787 11.2517 0.75 11.2517L21.4842 11.2517L15.2327 5.29697C14.9328 5.01129 14.9213 4.53655 15.2069 4.23663C15.4926 3.9367 15.9674 3.92516 16.2673 4.21084L23.6862 11.2775C23.8551 11.4385 23.9551 11.6437 23.9861 11.8571C23.9952 11.9039 24 11.9522 24 12.0017C24 12.0512 23.9952 12.0997 23.986 12.1466C23.955 12.3598 23.855 12.5649 23.6862 12.7257L16.2673 19.7924Z" fill="#6610F2"/>
+</svg>
+                            </span>
                 </div>
-            {{/if}}
-
-            {{#if settings.custom_block_new_6_toggle}}
-                <div class="site-block">
-                    <a class="site-div" href="{{#if settings.dc_toggle}}{{dc
-                            'custom_block_new_6_url'}}{{else}}{{settings.custom_new_block_6_url}}{{/if}}">
-                        <div class="site-icon site-icon-6"><img class="custom-block-image"src="{{settings.custom_block_new_6_icon}}" alt=""></div>
-                        <h4>{{#if settings.dc_toggle}}
-                            {{dc'custom_block_new_6_title'}}
-                        {{else}}
-                            {{settings.custom_block_new_6_title}}
-                        {{/if}}
-                        </h4>
-                    </a>
-                </div>
-            {{/if}}
-
+            </a>
         </div>
+        <!--General Topics component end -->
     </div>
 
     <!--  Modified Robot Banner  -->
@@ -638,8 +440,6 @@
             dots: false,
             loop: true,
             slideTransition: 'linear',
-            autoplay: {{settings.hero_carousel_autoplay}},
-            autoplayTimeout: "{{settings.hero_carousel_timeout}}",
             autoplayHoverPause: true,
             nav: true,
             navText: ['<i class="fa fa-angle-left" aria-hidden="true"></i>', '<i class="fa fa-angle-right" aria-hidden="true"></i>']
