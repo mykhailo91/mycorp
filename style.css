@@ -2312,51 +2312,43 @@ input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:act
 /*=========================== END OF HEADER */
 
 /*=========================== HERO */
-.hero-item {
-  font-family: Proxima Nova;
-  text-align: center;
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
   width: 100%;
-  height: 264px;
-  position: relative;
+  height: 140%;
   background-image: url($hero_image_file);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  padding: 64px 16px;
-  color: white; /*should be used as variable*/
+  opacity: 100%;
 }
 
-.hero-item__search {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.hero-background-carousel-1 {
+  background-image: url($hero_carousel_image_1);
 }
 
-.hero-item__search input {
-  border-radius: 20px;
-  border: 1px solid var(--grey-gray-3, #C0C0C0);
+.hero-background-carousel-2 {
+  background-image: url($hero_carousel_image_2);
 }
 
-.hero-item__search .search {
-  width: 384px;
-  margin: 24px 0 8px;
+.hero-background-carousel-3 {
+  background-image: url($hero_carousel_image_3);
 }
 
-.hero-title {
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 44px;
-  letter-spacing: 0.396px;
+.hero-background-gradient {
+  background: $hero_banner_gradient_value_1;
+  background: linear-gradient(90deg, $hero_banner_gradient_value_1 0%, $hero_banner_gradient_value_2 100%);
 }
 
-.hero-subtitle {
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 20px;
-  letter-spacing: -0.154px;
-  margin: 0;
+.hero-item {
+  position: relative;
+  padding: calc($hero_homepage_height * 0.5px) 32px;
+  background: $body_background_color;
+  transform: translate3d(0, 0, 0);
 }
 
 .banner-bg {
@@ -2411,12 +2403,46 @@ input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:act
   color: $hero_title_color !important;
 }
 
+@media (min-width: 480px) {
+  .hero-item {
+    padding: calc(($hero_homepage_height * 2px) + ($logo_height * 1px)) 32px calc($hero_homepage_height * 2px) 32px;
+  }
+}
+
+.hero-background:after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  content: "";
+  background-color: $hero_unit_mask_bg_color;
+  opacity: $hero_unit_mask_opacity;
+}
+
+.hero-background.gradient:before {
+  background: linear-gradient(180deg, transparent 20%, $body_background_color 100%);
+  position: absolute;
+  width: 100%;
+  left: 0;
+  height: 27%;
+  top: 73%;
+  content: "";
+}
+
 .hero-item.changed {
   overflow: hidden;
 }
 
 .hero-title {
+  margin-bottom: calc($body_font_size * $body_line_height);
+  font-size: 48px;
+  line-height: 1.1;
+  font-family: $body_font_family;
+  font-weight: 700;
   color: $hero_title_color;
+  text-align: center;
 }
 
 .hero-desc {
@@ -2430,6 +2456,20 @@ input[type="submit"]:hover, input[type="submit"]:focus, input[type="submit"]:act
   background-color: transparent;
   border-color: $hero_title_color;
   color: $hero_title_color;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: calc($hero_font_size * 0.9);
+    font-weight: 700;
+  }
+}
+
+@media (min-width: 992px) {
+  .hero-title {
+    margin-bottom: calc($body_font_size * $body_line_height * 1.5);
+    font-size: $hero_font_size;
+  }
 }
 
 /*=========================== END OF HERO */
@@ -3001,6 +3041,27 @@ pre {
 @media (max-width: 768px) {
   .search-container-hero-item .search:before {
     font-size: 20px;
+  }
+}
+
+.search-container-hero-item #query {
+  height: 50px;
+  padding: 0 55px;
+  font-size: 24px;
+  font-family: $body_font_family;
+  background-color: rgba(248, 248, 255, 1);
+  border-color: rgba(248, 248, 255, 1);
+  color: $text_color;
+  transition: all 0.3s ease;
+}
+
+.search-container-hero-item #query:focus {
+  background-color: rgba(248, 248, 255, 1);
+}
+
+@media (min-width: 992px) {
+  .search-container-hero-item #query {
+    height: 60px;
   }
 }
 
@@ -5910,7 +5971,7 @@ html[dir="rtl"] .notification-left-aligned {
 
 /*=========================== CUSTOM BLOCK */
 
-/*.site-block {
+.site-block {
   flex: 33%;
   text-align: center;
   padding: 20px;
@@ -5983,70 +6044,6 @@ html[dir="rtl"] .notification-left-aligned {
   margin-bottom: 15px;
   font-family: $body_font_family;
   font-weight: 700;
-}*/
-
-.site-wrapper {
-  justify-content: space-between;
-  flex-wrap: nowrap;
-  gap: 32px;
-}
-
-.site-block {
-  width: 100%;
-}
-
-.site-div {
-  background: $custom_block_bg_color;
-  border-radius: $border_radius_px;
-  /*border: 2px solid $custom_block_border;*/
-  min-width: 240px;
-  position: relative;
-  z-index: 1;
-  padding: 16px 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.site-div:hover {
-  box-shadow: 0px 8px 12px $shadow_color;
-  background-color: $body_background_color;
-}
-
-.site-div h4 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-}
-
-.site-icon svg {
-  height: 32px;
-  width: 32px;
-}
-
-.site-controls {
-  display: flex;
-  justify-content: space-between;
-}
-
-@media (max-width: 425px) {
-  .site-icon {
-  }
-}
-
-.site-div:hover > .site-icon {
-}
-
-.site-icon:before {
-}
-
-.site-div p {
-  color: $text_color;
-}
-
-.site-block h4 {
-  color: $text_color;
-  font-family: $body_font_family;
 }
 
 /*=========================== END OF CUSTOM BLOCK */
@@ -7012,6 +7009,12 @@ button.lines-btn.x:focus, span.lines:focus {
     top: 28px;
   }
 
+  .search-container-hero-item #query {
+    height: 50px;
+    padding: 0 40px;
+    font-size: 16px;
+  }
+
   .site-primary.py-6 {
     padding-top: 15px;
   }
@@ -7171,6 +7174,10 @@ aside.site-sidebar.py-6.light-bg.site-article button {
 }
 
 @media (max-width: 768px) {
+  .hero-title {
+    font-size: calc($hero_font_size * 0.8);
+  }
+
   .search-container-hero-item .search {
     display: flex;
     max-width: 460px;
@@ -7296,6 +7303,10 @@ aside.site-sidebar.py-6.light-bg.site-article button {
     display: none;
   }
 
+  .hero-item {
+    padding: calc((($hero_homepage_height/5) * 2px) + ($logo_height * 1px)) 32px calc(($hero_homepage_height/5) * 2px) 32px;
+  }
+
   .footer-col.footer-col-social-links {
     display: flex;
     align-items: center;
@@ -7317,6 +7328,10 @@ aside.site-sidebar.py-6.light-bg.site-article button {
 
   h2 {
     font-size: 24px;
+  }
+
+  .hero-title {
+    font-size: 25px;
   }
 
   .site-div {
